@@ -2,17 +2,27 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>記録 | 狭間書房</title>
   <style>
-     body {
-  background-color: #0e0e0e;
-  color: #f2f2f2;
-  font-family: "Hiragino Mincho ProN", "MS Mincho", serif;
-  margin: 0;
-  line-height: 2;
-  width: 100%;
-}
-/* ヘッダー */
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    body {
+      background-color: #111;
+      color: #f5f5f5;
+      font-family: "Hiragino Mincho ProN", "MS Mincho", serif;
+      line-height: 1.8;
+    }
+
+    /* ヘッダー */
     header {
       display: flex;
       justify-content: space-between;
@@ -20,12 +30,25 @@
       padding: 1em 2em;
       background-color: #666;
       color: #fff;
-       width: 100%;   /* 画面いっぱい */
+      flex-shrink: 0;
+      gap: 2em;
       box-sizing: border-box;
+      width: 100%;
     }
     .title-wrapper {
       display: flex;
       flex-direction: column;
+    }
+    .title-wrapper a {
+      text-decoration: none;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
+    }
+    .title-wrapper a:hover h1 {
+      opacity: 0.8;
+      transition: opacity 0.3s ease;
     }
     header h1 {
       margin: 0;
@@ -33,6 +56,8 @@
       letter-spacing: 0.1em;
       line-height: 1;
       border: none;
+      font-family: "Hiragino Mincho ProN", "MS Mincho", serif;
+      font-weight: 700;
     }
     .subtitle {
       margin: 0;
@@ -42,72 +67,91 @@
       text-align: center;
       color: #fff;
     }
+
     /* 検索 */
     .search {
       display: flex;
       align-items: center;
+      gap: 0.5em;
+      flex-shrink: 0;
+      margin-left: auto;
+    }
+    .search form {
+      display: flex;
+      align-items: center;
+      gap: 0.5em;
     }
     .search input {
       padding: 4px;
-      border: 2px solid #003366;
+      border: 2px solid #333;
       border-radius: 4px;
       width: 150px;
       background-color: #fff;
-      color: #003366;
+      color: #333;
     }
     .search input::placeholder {
-      color: #003366aa;
+      color: #333aa;
     }
     .search button {
       padding: 4px 6px;
-      margin-left: 4px;
       border-radius: 4px;
       border: none;
-      background-color: #003366;
+      background-color: #333;
       color: #fff;
       cursor: pointer;
+      white-space: nowrap;
+      flex-shrink: 0;
     }
     .search button:hover {
-      background-color: #001f33;
+      background-color: #222;
     }
-/* ナビゲーション */
+
+    /* ナビゲーション */
     nav {
       text-align: center;
       padding: 1em 0;
       background-color: #f0f0f0;
+      flex-shrink: 0;
+      overflow-x: auto;
+      box-sizing: border-box;
+      width: 100%;
     }
     nav a {
       color: #003366;
       margin: 0 1em;
       text-decoration: none;
       font-weight: bold;
+      display: inline-block;
+      white-space: nowrap;
     }
     nav a:hover {
       color: #666;
     }
-/* コンテンツ */
-    .content {
-      max-width: 1000px;
-      margin: 2em auto;
-      padding: 0 1em;
+    nav a.active {
+      color: #666;
+      border-bottom: 2px solid #666;
     }
-/* フッター */
-    footer {
-            background-color: #666;
-            color: #ffffff;
-            text-align: center;
-            padding: 1em;
-            margin-top: 3em;
-        }
-    
-    h1 {
+
+    /* メインコンテンツ */
+    main {
+      flex: 1;
+      max-width: 1200px;
+      margin: 2em auto;
+      padding: 0 2em;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    main > h1 {
       font-size: 1.8em;
       margin-bottom: 1.5em;
       text-align: center;
       letter-spacing: 0.08em;
       border-bottom: 1px solid #333;
       padding-bottom: 0.5em;
+      color: #f5f5f5;
     }
+
     .monologue {
       max-width: 750px;
       margin: 0 auto;
@@ -115,53 +159,189 @@
       background: #1a1a1a;
       border-left: 4px solid #555;
       box-shadow: 0 0 12px rgba(0,0,0,0.6);
+      box-sizing: border-box;
+      line-height: 2;
     }
+
     .monologue p {
       margin: 1.2em 0;
       text-indent: 1em;
+      word-wrap: break-word;
+    }
+
+    /* フッター */
+    footer {
+      background-color: #666;
+      color: #ffffff;
+      text-align: center;
+      padding: 1em;
+      flex-shrink: 0;
+      margin-top: auto;
+      box-sizing: border-box;
+      width: 100%;
+    }
+
+    /* レスポンシブ */
+    @media (max-width: 768px) {
+      header {
+        padding: 1em;
+        justify-content: center;
+        text-align: center;
+        flex-wrap: wrap;
+        gap: 1em;
+      }
+
+      header h1 {
+        font-size: 2em;
+      }
+
+      .title-wrapper {
+        width: 100%;
+      }
+
+      .search {
+        width: 100%;
+      }
+
+      .search form {
+        width: 100%;
+        display: flex;
+      }
+
+      .search input {
+        width: 100%;
+        flex: 1;
+      }
+
+      nav a {
+        margin: 0 0.5em;
+        font-size: 0.9em;
+      }
+
+      main {
+        padding: 0 1em;
+        margin: 1em auto;
+      }
+
+      main > h1 {
+        font-size: 1.5em;
+        margin-bottom: 1.2em;
+      }
+
+      .monologue {
+        padding: 1.5em;
+        line-height: 1.9;
+      }
+
+      .monologue p {
+        margin: 1em 0;
+        font-size: 0.95em;
+      }
+    }
+
+    @media (max-width: 480px) {
+      header {
+        flex-direction: column;
+        gap: 0.5em;
+      }
+
+      header h1 {
+        font-size: 1.5em;
+      }
+
+      .subtitle {
+        font-size: 0.9em;
+      }
+
+      .search {
+        width: 100%;
+      }
+
+      .search input {
+        width: 100%;
+        padding: 0.5em;
+      }
+
+      .search button {
+        padding: 0.5em 0.8em;
+        font-size: 0.9em;
+      }
+
+      nav a {
+        margin: 0 0.3em;
+        font-size: 0.8em;
+      }
+
+      main {
+        padding: 0 0.8em;
+        margin: 0.8em auto;
+      }
+
+      main > h1 {
+        font-size: 1.3em;
+        margin-bottom: 1em;
+        letter-spacing: 0.05em;
+      }
+
+      .monologue {
+        padding: 1.2em;
+        line-height: 1.8;
+        border-left-width: 3px;
+      }
+
+      .monologue p {
+        margin: 0.9em 0;
+        font-size: 0.9em;
+        text-indent: 0.8em;
+      }
     }
   </style>
 </head>
 <body>
   <header>
-  <div class="title-wrapper">
-    <h1>狭間書房</h1>
-    <p class="subtitle">Hazama Publishing</p>
-  </div>
-  <div class="search">
+    <div class="title-wrapper">
+      <a href="https://hazamashobo.github.io/main/index.html">
+        <h1>狭間書房</h1>
+        <p class="subtitle">Hazama Publishing</p>
+      </a>
+    </div>
+    <div class="search">
       <form action="https://hazamashobo.github.io/result/" method="get">
         <input type="text" id="searchInput" name="q" placeholder="キーワード入力">
         <button type="submit">検索</button>
       </form>
     </div>
-</header>
+  </header>
 
   <nav>
     <a href="https://hazamashobo.github.io/main/index.html">ホーム</a>
     <a href="https://hazamashobo.github.io/company/index.html">狭間書房について</a>
     <a href="https://hazamashobo.github.io/books/index.html">刊行物</a>
-    <a href="https://hazamashobo.github.io/contact/index.html"class="active">お問い合わせ</a>
+    <a href="https://hazamashobo.github.io/contact/index.html" class="active">お問い合わせ</a>
   </nav>
-  <h1>記録</h1>
 
-  <div class="monologue">
-    <p>湯田くんから出版物のデジタル化について提案を受けた。実際多くの企業が取り入れていて、デジタルの利便性や効率には目を見張るものがある。多くの人に素早く届き、場所も時間も選ばない。確かにこの業界で生き残るためには早急に取り組んだほうが良いのかもしれない。</p>
+  <main>
+    <h1>記録</h1>
 
-  <p>それでも私は、本が持つ「モノの力」を信じている。紙をめくるときの感触、インクの匂い、読み終わった後に本を閉じる動作――それはデジタルには置き換えられないと、どうしても思ってしまう。だからこそ、提案を受け入れることができなかった。まだいいんじゃないか、と思ってしまったんだ。</p>
+    <div class="monologue">
+      <p>湯田くんから出版物のデジタル化について提案を受けた。実際多くの企業が取り入れていて、デジタルの利便性や効率には目を見張るものがある。多くの人に素早く届く、場所も時間も選ばない。確かにこの業界で生き残るためには早急に取り組んだほうが良いのかもしれない。</p>
 
-  <p>そう伝えた瞬間、湯田くんの表情に影が差したのをはっきりと感じた。失望させてしまったのだろう。胸が痛む。彼の未来を奪ったのではないかとすら思う。湯田くん、本当にすまない。</p>
+      <p>それでも私は、本が持つ、「モノの力」を信じている。紙をめくるときの感触、インクの匂い、読み終わった後に本を閉じる動作――それはデジタルには置き換えられないと、どうしても思ってしまう。だからこそ、提案を受け入れることができなかった。まだいいんじゃないか、と思ってしまったんだ。</p>
 
-  <p>ただ、その眼差しには言葉にできない強さがあった。私の想像を超えた覚悟を抱えているようにも見えた。あの気迫を前にすると、これから先、私の身に何が起きてもおかしくはないと感じてしまう。</p>
+      <p>そう伝えた瞬間、湯田くんの表情に影が差したのをはっきりと感じた。失望させてしまったのだろう。胸が痛む。彼の未来を奪ったのではないかとすら思う。湯田くん、本当にすまない。</p>
 
-  <p>それでも、私は彼を受け入れようと思う。「君がしようとしていることをいますぐにしなさい。」とだけ伝えてその場を去った。どちらに転ぶかわからないが、何が起こっても私は湯田くんの行いを尊重する。</p>
+      <p>ただ、その眼差しには言葉にできない強さがあった。私の想像を超えた覚悟を抱えているようにも見えた。あの気迫を前にすると、これから先、私の身に何が起きてもおかしくはないと感じてしまう。</p>
 
-  <p>私はこれからどうなってしまうのだろう。</p>
+      <p>それでも、私は彼を受け入れようと思う。「君がしようとしていることをいますぐにしなさい。」とだけ伝えてその場を去った。どちらに転ぶかわからないが、何が起こっても私は湯田くんの行いを尊重する。</p>
 
-  <p>申し訳ないと思いつつ、福井くんに頼んで湯田くんのマイページを見せてもらった。<br>『最後の晩餐』から着想を得て、新約聖書になぞらえられているのなら、私の最期はあの場所だろうか。</p>
-    
-  <p>あぁ、ともすれば、あのLiminal spaceを報告したのは湯田くんだったのだろうか。</p>
-  <p>あの場所の名前から、何か情報が得られるのだろうか。</p>
-  </div>
+      <p>私はこれからどうなってしまうのだろう。</p>
+
+      <p>申し訳ないと思いつつ、福井くんに頼んで湯田くんのマイページを見せてもらった。<br>『最後の晩餐』から着想を得て、新約聖書になぞらえられているのなら、私の最期はあの場所だろうか。</p>
+      
+      <p>ああ、ともすれば、あのLiminal spaceを報告したのは湯田くんだったのだろうか。</p>
+      <p>あの場所の名前から、何か情報が得られるのだろうか。</p>
+    </div>
+  </main>
 
   <footer>
     <p>© 2025 狭間書房</p>
